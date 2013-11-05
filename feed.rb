@@ -30,19 +30,36 @@ htmlPage.xpath('//pre').each do |pre|
     date = entry[4]
     name = entry[5]
 
-    show = Show.new
-    show.season = season
-    show.episode = episode
-    show.date = date
-    show.name = name
+    if date != 'UNAIRED'
+     show = Show.new
+     show.season = season
+     show.episode = episode
+     show.date = date
+     show.name = name
 
-    shows << show
+     shows << show
+    end
   end
 
-  puts 'number of entries: ', arr_of_arrs.count
+  #shows.each do |show|
+  #  print show.season, '/', show.episode, ': ', show.name, ' ', show.date
+  #  puts
+  #end
 
-  shows.each do |show|
-    print show.season, '/', show.episode, ': ', show.name, ' ', show.date
-    puts
+  rss = RSS::Maker.make("atom") do |maker|
+    maker.channel.author = "meta"
+    maker.channel.updated = Time.now.to_s # should be newest date from CSV
+    maker.channel.about = 'http://nyi.ch'
+    maker.channel.title = 'Episodes'
+
+    shows.each do |show|
+       maker.items.new_item do |item|
+         item.link = 'http://nyi.ch'
+         item.title = show.name
+         item.updated = show.date
+       end
+    end
   end
+
+  puts rss
 end
