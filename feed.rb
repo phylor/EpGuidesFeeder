@@ -10,6 +10,10 @@ class Show
   @episode
   @name
   @date
+
+  def get_episode_string
+    "S#{@season}E#{@episode}"
+  end
 end
 
 class EpGuideFeed
@@ -61,8 +65,8 @@ class EpGuideFeed
     
         @shows.each do |show|
            maker.items.new_item do |item|
-             item.link = "https://www.google.com/#q=#{URI::encode seriesName}+s#{show.season}e#{show.episode}+netload"
-             item.title = show.name
+             item.link = "https://www.google.com/#q=#{URI::encode seriesName}+#{show.get_episode_string}+netload"
+             item.title = show.get_episode_string + ' ' + show.name
              item.updated = show.date
            end
         end
