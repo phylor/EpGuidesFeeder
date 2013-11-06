@@ -64,11 +64,14 @@ class EpGuideFeed
         maker.channel.title = seriesName
     
         @shows.each do |show|
+          if Date.parse(show.date) <= Date.today
+
            maker.items.new_item do |item|
              item.link = "https://www.google.com/#q=#{URI::encode seriesName}+#{show.get_episode_string}+netload"
              item.title = show.get_episode_string + ' ' + show.name
              item.updated = show.date
            end
+          end
         end
       end
 
