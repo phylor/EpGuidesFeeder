@@ -23,7 +23,7 @@ class EpGuideFeed
     @shows = Array.new
   end
 
-  def get_feed(seriesName, epGuideId)
+  def get_feed(seriesName, epGuideId, queryParams)
     htmlPage = Nokogiri::HTML(open('http://www.epguides.com/common/exportToCSV.asp?rage='+epGuideId.to_s))
     
     htmlPage.xpath('//pre').each do |pre|
@@ -40,7 +40,7 @@ class EpGuideFeed
         date = entry[4]
         name = entry[5]
     
-        if date != 'UNAIRED'
+        if date != 'UNAIRED' and season and episode and name
          show = Show.new
          show.season = "%02d" % season
          show.episode = "%02d" % episode
@@ -67,7 +67,7 @@ class EpGuideFeed
           if Date.parse(show.date) <= Date.today
 
            maker.items.new_item do |item|
-             item.link = "https://www.google.com/#q=#{URI::encode seriesName}+#{show.get_episode_string}+netload"
+             item.link = "https://www.google.com/#q=#{URI::encode seriesName}+#{show.get_episode_string}+#{queryParams}"
              item.title = show.get_episode_string + ' ' + show.name
              item.updated = show.date
            end
