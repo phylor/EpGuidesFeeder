@@ -1,0 +1,9 @@
+!!!
+%html
+  %head
+    %title Ep Guide Feeder
+  %body
+    %ul
+      - shows.each do |show|
+        %li
+          %a(href='/#{show.title}/#{show.id}') #{show.title}

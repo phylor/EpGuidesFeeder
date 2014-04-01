@@ -79,6 +79,3 @@ class EpGuideFeed
     end
   end
 end
-
-#feed = EpGuideFeed.new
-#puts feed.get_feed 'The Big Bang Theory', 8511
