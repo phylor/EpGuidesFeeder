@@ -40,7 +40,7 @@ get '/search' do
       id = entry[2]
 
       if id and title
-        if title.include?(q)
+        if title.downcase.include?(q.downcase)
           show = ShowReference.new
           show.id = id
           show.title = title
