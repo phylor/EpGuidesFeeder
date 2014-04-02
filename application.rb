@@ -21,6 +21,8 @@ end
 get '/search' do
   q = params[:q]
 
+  shows = Array.new
+
   if q
     csvContent = open('public/data/allshows.txt', 'r:ISO-8859-1')
 
@@ -29,8 +31,6 @@ get '/search' do
     #htmlPage.xpath('//pre').each do |pre|
     #  csvContent = pre.content
     #  csvContent.strip!
-
-    shows = Array.new
 
     arr_of_arrs = CSV.parse(csvContent)
     arr_of_arrs.shift
@@ -50,6 +50,8 @@ get '/search' do
       end
     end
 
-    haml :search, :locals => { :shows => shows }
+
   end
+
+  haml :search, :locals => { :shows => shows, :q => q }
 end

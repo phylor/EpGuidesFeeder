@@ -1,9 +1,11 @@
-!!!
-%html
-  %head
-    %title Ep Guide Feeder
-  %body
-    %ul
-      - shows.each do |show|
-        %li
-          %a(href='/#{show.title}/#{show.id}') #{show.title}
+%form(action='/search' method='get')
+  %input(type='text' name='q' value='#{q}')
+  %input(type='submit' value='search')
+
+- if shows.count == 0
+  %p No shows found.
+
+%ul
+  - shows.each do |show|
+    %li
+      %a(href='/#{show.title}/#{show.id}') #{show.title}
