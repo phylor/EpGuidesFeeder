@@ -8,7 +8,7 @@ class ShowReference
 end
 
 get '/' do
-  haml :usage
+  redirect 'search'
 end
 
 get '/:name/:id' do
