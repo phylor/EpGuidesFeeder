@@ -2,7 +2,7 @@
   %input(type='text' name='q' value='#{q}')
   %input(type='submit' value='search')
 
-- if shows.count == 0
+- if shows.count == 0 && q
   %p No shows found.
 
 %ul
