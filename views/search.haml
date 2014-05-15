@@ -1,9 +1,14 @@
-%form(action='/search' method='get')
-  %input(type='text' name='q' value='#{q}')
-  %input(type='submit' value='search')
+%form.form-inline(action='/search' method='get')
+  .form-group
+    .input-group
+      %input.form-control(type='search' name='q' value='#{q}' placeholder='search')
+      %span.input-group-btn
+        %button.btn.btn-default(type='submit')
+          search
 
 - if shows.count == 0 && q
-  %p No shows found.
+  .alert.alert-info
+    No shows found.
 
 %ul
   - shows.each do |show|
