@@ -10,7 +10,6 @@
   .alert.alert-info
     No shows found.
 
-%ul.list-group
+.list-group
   - shows.each do |show|
-    %li.list-group-item
-      %a(href='/#{show.title}/#{show.id}') #{show.title}
+    %a.list-group-item(href='/#{show.title}/#{show.id}') #{show.title}
