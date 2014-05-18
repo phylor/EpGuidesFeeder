@@ -20,10 +20,11 @@ end
 
 get '/search' do
   q = params[:q]
+  search = params[:search]
 
   shows = Array.new
 
-  if q
+  if search
     csvContent = open('public/data/allshows.txt', 'r:ISO-8859-1')
 
     #open from the web
@@ -40,7 +41,7 @@ get '/search' do
       id = entry[2]
 
       if id and title
-        if title.downcase.include?(q.downcase)
+        if title.downcase.include?(search.downcase)
           show = ShowReference.new
           show.id = id
           show.title = title
@@ -53,5 +54,5 @@ get '/search' do
 
   end
 
-  haml :search, :locals => { :shows => shows, :q => q }
+  haml :search, :locals => { :shows => shows, :q => q, :search => search }
 end

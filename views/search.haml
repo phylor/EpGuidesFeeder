@@ -1,10 +1,16 @@
 %form.form-inline(action='/search' method='get')
   .form-group
     .input-group
-      %input.form-control(type='search' name='q' value='#{q}' placeholder='search')
+      %input.form-control(type='search' name='search' value='#{search}' placeholder='search')
       %span.input-group-btn
         %button.btn.btn-default(type='submit')
           %span.glyphicon.glyphicon-search
+  .form-group
+    .input-group
+      %input.form-control(type='search' name='q' value='#{q}' placeholder='feed query term')
+      %span.input-group-btn
+        %button.btn.btn-default(type='submit')
+          %span.glyphicon.glyphicon-refresh
 
 - if shows.count == 0 && q
   .alert.alert-info
@@ -12,4 +18,4 @@
 
 .list-group
   - shows.each do |show|
-    %a.list-group-item(href='/#{show.title}/#{show.id}') #{show.title}
+    %a.list-group-item(href='/#{show.title}/#{show.id}?q=#{q}') #{show.title}
