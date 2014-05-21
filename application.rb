@@ -1,5 +1,7 @@
 require 'sinatra'
 require 'haml'
+require 'date'
+require 'open-uri'
 
 require_relative 'feed'
 
@@ -25,13 +27,21 @@ get '/search' do
   shows = Array.new
 
   if search
-    csvContent = open('public/data/allshows.txt', 'r:ISO-8859-1')
+    filename = 'public/data/allshows.txt'
+    file_exists = File.file?(filename)
+    days_old = 1
+    if file_exists
+      days_old = (DateTime.now-File.mtime(filename).to_date).to_i
+    end
 
-    #open from the web
-    #htmlPage = Nokogiri::HTML(open(..))
-    #htmlPage.xpath('//pre').each do |pre|
-    #  csvContent = pre.content
-    #  csvContent.strip!
+    if(days_old > 0)
+      document = open('http://epguides.com/common/allshows.txt')
+      File.write(filename, document.read)
+    end
+
+    csvContent = open(filename, 'r:ISO-8859-1')
+
+
 
     arr_of_arrs = CSV.parse(csvContent)
     arr_of_arrs.shift
