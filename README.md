@@ -1,5 +1,6 @@
 EpGuidesFeeder
 ==============
+![Screenshot](http://phylor.github.io/EpGuidesFeeder/img/screenshot.png)
 
 What is it?
 --------------
