@@ -1,19 +1,26 @@
-EpGuidesFeeder
-==============
+# EpGuidesFeeder
+
 ![Screenshot](http://phylor.github.io/EpGuidesFeeder/img/screenshot.png)
 
-What is it?
---------------
+## What is it?
+
 Converts the show information from epguides.com to an RSS feed.
 
-What do I need to run it?
----------------------------------
-Ruby, Sinatra and a server to deploy it to.
+## Running it
 
-How do I use it?
-----------------------
+### Docker Container
+
+To run it in a docker container on port `2000`:
+
+    docker run --name epguidesfeeder -p 2000:80 phylor/epguidesfeeder
+
+### Run it manually
+
+You need Ruby installed. Then do:
+
+    bundle install
+    rackup
+
+## How do I use it?
+
 Search a show by calling `/search?q=my%20search%20term`. Copy the shown link of your desired show and add it to your RSS reader.
-
-Why is this so complicated to use?
------------------------------------------------
-It's work in progress. Improvements and simplifications will follow.
