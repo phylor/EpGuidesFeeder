@@ -23,4 +23,4 @@ You need Ruby installed. Then do:
 
 ## How do I use it?
 
-Search a show by calling `/search?q=my%20search%20term`. Copy the shown link of your desired show and add it to your RSS reader.
+Search for a show in the first input box. The link to the RSS feed is on the right of every search result. Each episode in the RSS feed links to a Google search of the show and its episode. If you want to have further search terms, you can add them in the second input box prior to copying the link to the RSS feed.
